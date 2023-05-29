@@ -8,7 +8,7 @@ echo -e '\e[33mAdding user roboshop\e[0m'
 useradd roboshop
 
 echo -e '\e[33mMakinging directory roboshop\e[0m'
-rm -rf app
+rm -rf /app
 mkdir /app
 
 echo -e '\e[33mDownloading catalogue Content\e[0m'
@@ -21,7 +21,7 @@ echo -e '\e[33mInstalling Dependencies\e[0m'
 npm install &>>/tmp/roboshop.log
 
 echo -e '\e[33mSetup SystemD Service\e[0m'
-cp cp /root/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>>/tmp/roboshop.log
+cp /root/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>>/tmp/roboshop.log
 echo -e '\e[33mReloading the Service\e[0m'
 systemctl daemon-reload &>>/tmp/roboshop.log
 systemctl enable catalogue &>>/tmp/roboshop.log
