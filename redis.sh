@@ -4,7 +4,7 @@ yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>>/tmp/r
 echo -e '\e[33mEnabling the required Module\e[0m'
 yum module enable redis:remi-6.2 -y &>>/tmp/roboshop.log
 
-echo -e '\e[33mInstalling the Redis\e[0m'
+echo -e '\e[33mInstalling Redis\e[0m'
 yum install redis -y &>>/tmp/roboshop.log
 
 echo -e '\e[33mUpdating the Port\e[0m'
