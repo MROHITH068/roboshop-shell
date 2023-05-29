@@ -1,8 +1,8 @@
 echo -e '\e[33mDownloading NodeJS repos\e[0m'
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/roboshop.log
 
 echo -e '\e[33mInstalling NodeJS\e[0m'
-yum install nodejs -y
+yum install nodejs -y &>>/tmp/roboshop.log
 
 echo -e '\e[33mAdding user roboshop\e[0m'
 useradd roboshop
