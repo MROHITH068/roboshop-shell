@@ -12,7 +12,7 @@ rm -rf /app
 mkdir /app
 
 echo -e '\e[33mDownloading User Content\e[0m'
-curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user.zip
+curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user.zip &>>/tmp/roboshop.log
 cd /app
 unzip /tmp/user.zip &>>/tmp/roboshop.log
 
