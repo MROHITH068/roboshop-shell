@@ -12,22 +12,22 @@ rm -rf app
 mkdir /app
 
 echo -e '\e[33mDownloading catalogue Content\e[0m'
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>/tmp/roboshop.log
 cd /app
-unzip /tmp/catalogue.zip
+unzip /tmp/catalogue.zip &>>/tmp/roboshop.log
 cd /app
 
 echo -e '\e[33mInstalling Dependencies\e[0m'
-npm install
+npm install &>>/tmp/roboshop.log
 
 echo -e '\e[33mReloading the Service\e[0m'
-systemctl daemon-reload
+systemctl daemon-reload &>>/tmp/roboshop.log
 
 echo -e '\e[33mAdding MongoDB repo file\e[0m'
-cp mongodb.repo /etc/yum.repos.d/mongo.repo
+cp mongodb.repo /etc/yum.repos.d/mongo.repo &>>/tmp/roboshop.log
 
 echo -e '\e[33mInstalling MongoDB Client\e[0m'
-yum install mongodb-org-shell -y
+yum install mongodb-org-shell -y &>>/tmp/roboshop.log
 
 echo -e '\e[33mLoading the Schema\e[0m'
-mongo --host mongodb-dev.rohdevops.online </app/schema/catalogue.js
+mongo --host mongodb-dev.rohdevops.online </app/schema/catalogue.js &>>/tmp/roboshop.log
