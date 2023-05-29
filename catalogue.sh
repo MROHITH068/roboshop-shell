@@ -20,11 +20,15 @@ cd /app
 echo -e '\e[33mInstalling Dependencies\e[0m'
 npm install &>>/tmp/roboshop.log
 
+echo -e '\e[33mSetup SystemD Service\e[0m'
+cp cp /root/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>>/tmp/roboshop.log
 echo -e '\e[33mReloading the Service\e[0m'
 systemctl daemon-reload &>>/tmp/roboshop.log
+systemctl enable catalogue &>>/tmp/roboshop.log
+systemctl restart catalogue &>>/tmp/roboshop.log
 
 echo -e '\e[33mAdding MongoDB repo file\e[0m'
-cp mongodb.repo /etc/yum.repos.d/mongo.repo &>>/tmp/roboshop.log
+cp /root/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo &>>/tmp/roboshop.log
 
 echo -e '\e[33mInstalling MongoDB Client\e[0m'
 yum install mongodb-org-shell -y &>>/tmp/roboshop.log
