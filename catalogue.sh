@@ -19,3 +19,15 @@ cd /app
 
 echo -e '\e[33mInstalling Dependencies\e[0m'
 npm install
+
+echo -e '\e[33mReloading the Service\e[0m'
+systemctl daemon-reload
+
+echo -e '\e[33mAdding MongoDB repo file\e[0m'
+cp mongodb.repo /etc/yum.repos.d/mongo.repo
+
+echo -e '\e[33mInstalling MongoDB Client\e[0m'
+yum install mongodb-org-shell -y
+
+echo -e '\e[33mLoading the Schema\e[0m'
+mongo --host mongodb-dev.rohdevops.online </app/schema/catalogue.js
