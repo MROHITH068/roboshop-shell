@@ -10,7 +10,7 @@ mkdir /app &>>/tmp/roboshop.log
 
 echo -e '\e[33mDownloading Shipping Content\e[0m'
 curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping.zip &>>/tmp/roboshop.log
-cd /app
+
 unzip /tmp/shipping.zip &>>/tmp/roboshop.log
 
 echo -e '\e[33mUnpacking Shipping jar file\e[0m'
@@ -19,7 +19,7 @@ mvn clean package &>>/tmp/roboshop.log
 mv target/shipping-1.0.jar shipping.jar &>>/tmp/roboshop.log
 
 echo -e '\e[33mSetup SystemD Service\e[0m'
-cp /root/roboshop-shell/shipping.service  /etc/systemd/system/shipping.service
+cp /root/roboshop-shell/shipping.service  /etc/systemd/system/shipping.service &>>/tmp/roboshop.log
 
 echo -e '\e[33mInstalling MySQL Client\e[0m'
 yum install mysql -y &>>/tmp/roboshop.log
