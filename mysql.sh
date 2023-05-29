@@ -1,4 +1,4 @@
-echo -e '\e[33mDisabling the required Module\e[0m'
+echo -e '\e[33mDisabling current module\e[0m'
 yum module disable mysql -y &>>/tmp/roboshop.log
 
 echo -e '\e[33mAdding the Repo File\e[0m'
