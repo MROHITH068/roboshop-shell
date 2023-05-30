@@ -42,19 +42,19 @@ mysql_setup(){
 node_js() {
 
   echo -e '${color}Downloading NodeJS repos${nocolor}'
-  curl -sL https://rpm.nodesource.com/setup_lts.x | bash data_dog
+  curl -sL https://rpm.nodesource.com/setup_lts.x | bash ${data_dog}
 
   echo -e '${color}Installing NodeJS${nocolor}'
-  yum install nodejs -y data_dog
+  yum install nodejs -y ${data_dog}
 
 
   preapp_setup
 
   echo -e '${color}Installing Dependencies${nocolor}'
-  npm install data_dog
+  npm install ${data_dog}
 
   echo -e '${color}Setup SystemD Service${nocolor}'
-  cp /root/roboshop-shell/${component}.service /etc/systemd/system/${component}.service data_dog
+  cp /root/roboshop-shell/${component}.service /etc/systemd/system/${component}.service ${data_dog}
 
   systemd_setup
 }
@@ -62,7 +62,7 @@ node_js() {
 mongo_schema_setup(){
 
 echo -e '${color}Adding MongoDB repo file${nocolor}'
-cp /root/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo data_dog
+cp /root/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo ${data_dog}
 
 echo -e '${color}Installing MongoDB Client${nocolor}'
 yum install mongodb-org-shell -y ${data_dog}
