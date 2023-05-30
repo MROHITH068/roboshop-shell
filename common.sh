@@ -30,18 +30,6 @@ systemd_setup(){
 
 }
 
-mysql_setup(){
-   echo -e "${color}Installing MySQL Client${nocolor}"
-    yum install mysql -y &>>${data_log}
-
-    echo -e "${color}Loading the Schema${nocolor}"
-    mysql -h mysql-dev.rohdevops.online -uroot -pRoboShop@1 < /app/schema/${component}.sql &>>${data_log}
-
-    echo -e "${color}Setup SystemD Service${nocolor}"
-    cp /root/roboshop-shell/${component}.service  /etc/systemd/system/${component}.service &>>${data_log}
-}
-
-
 node_js() {
 
   echo -e "${color}Downloading NodeJS repos${nocolor}"
@@ -68,8 +56,20 @@ echo -e "${color}Installing MongoDB Client${nocolor}"
 yum install mongodb-org-shell -y &>>${data_log}
 
 echo -e "${color}Loading the Schema${nocolor}"
-mongo --host mongodb-dev.rohdevops.online <${app_path}/schema/$component.js &>>${data_log}
+mongo --host mongodb-dev.rohdevops.online <${app_path}/schema/${component}.js &>>${data_log}
 }
+
+mysql_setup(){
+   echo -e "${color}Installing MySQL Client${nocolor}"
+    yum install mysql -y &>>${data_log}
+
+    echo -e "${color}Loading the Schema${nocolor}"
+    mysql -h mysql-dev.rohdevops.online -uroot -pRoboShop@1 <${app_path}/schema/${component}.sql &>>${data_log}
+
+    echo -e "${color}Setup SystemD Service${nocolor}"
+    cp /root/roboshop-shell/${component}.service  /etc/systemd/system/${component}.service &>>${data_log}
+}
+
 
 maven(){
 
