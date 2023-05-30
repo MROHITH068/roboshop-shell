@@ -1,4 +1,4 @@
 source common.sh
-component= cart
+component=cart
 
 node_js

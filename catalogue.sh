@@ -1,5 +1,5 @@
 source common.sh
-component= catalogue
+component=catalogue
 
 node_js
-
+mongo_schema_setup

@@ -1,5 +1,5 @@
 source common.sh
-component= user
+component=user
 
 node_js
 mongo_schema_setup
