@@ -45,6 +45,8 @@ node_js() {
   npm install &>>${data_log}
 
   systemd_setup
+
+  mongo_schema_setup
 }
 
 mongo_schema_setup(){
