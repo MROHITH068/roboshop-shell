@@ -86,3 +86,7 @@ maven(){
 
   systemd_setup
 }
+
+python(){
+
+}
