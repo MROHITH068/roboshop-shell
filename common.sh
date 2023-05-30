@@ -88,5 +88,15 @@ maven(){
 }
 
 python(){
+echo -e '\e[33mInstall Python package\e[0m'
+yum install python36 gcc python3-devel -y &>>${data_log}
 
+preapp_setup
+
+echo -e '\e[33mPip installing requirements\e[0m'
+cd /app
+pip3.6 install -r requirements.txt &>>${data_log}
+
+
+systemd_setup
 }
