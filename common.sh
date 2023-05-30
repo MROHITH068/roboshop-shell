@@ -68,7 +68,7 @@ echo -e "${color}Installing MongoDB Client${nocolor}"
 yum install mongodb-org-shell -y ${data_dog}
 
 echo -e "${color}Loading the Schema${nocolor}"
-mongo --host mongodb-dev.rohdevops.online </app/schema/${component}.js ${data_dog}
+mongo --host mongodb-dev.rohdevops.online <${app_path}/schema/$component.js ${data_dog}
 }
 
 maven(){
