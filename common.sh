@@ -88,12 +88,12 @@ maven(){
 }
 
 python(){
-echo -e '\e[33mInstall Python package\e[0m'
+echo -e "${color}Install Python package${nocolor}"
 yum install python36 gcc python3-devel -y &>>${data_log}
 
 preapp_setup
 
-echo -e '\e[33mPip installing requirements\e[0m'
+echo -e "${color}Pip installing requirements${nocolor}"
 cd /app
 pip3.6 install -r requirements.txt &>>${data_log}
 
