@@ -2,12 +2,19 @@ color="\e[33m"
 nocolor="\e[0m"
 data_log="/tmp/roboshop.log"
 app_path="/app"
+user_id=$(id -u)
+  if [ ${user_id} -ne 0 ]; then
+    echo Script should be run as Root User
+    exit 1
+  fi
+
 
 stat_check(){
    if [ $1 -eq 0 ]; then
       echo SUCCESS
     else
       echo FAILURE
+      exit 1
     fi
 }
 
@@ -17,8 +24,7 @@ preapp_setup(){
   if [ $? -eq 1 ]; then
     useradd roboshop &>>${data_log}
   fi
-#useradd roboshop &>>${data_log}
- stat_check $?
+  stat_check $?
   echo -e "${color}Makinging directory app${nocolor}"
   rm -rf ${app_path}
   mkdir ${app_path} &>>${data_log}
