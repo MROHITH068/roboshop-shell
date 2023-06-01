@@ -5,11 +5,11 @@ app_path="/app"
 
 preapp_setup(){
   echo -e "${color}Adding user roboshop${nocolor}"
-#  id roboshop &>>${data_log}
-#  if [ $? -eq 1 ]; then
-#    useradd roboshop &>>${data_log}
-#  fi
-useradd roboshop &>>${data_log}
+  id roboshop &>>${data_log}
+  if [ $? -eq 1 ]; then
+    useradd roboshop &>>${data_log}
+  fi
+#useradd roboshop &>>${data_log}
   if [ $? -eq 0 ]; then
     echo SUCCESS
   else
