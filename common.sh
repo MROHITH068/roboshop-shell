@@ -3,6 +3,14 @@ nocolor="\e[0m"
 data_log="/tmp/roboshop.log"
 app_path="/app"
 
+stat_check(){
+   if [ $1 -eq 0 ]; then
+      echo SUCCESS
+    else
+      echo FAILURE
+    fi
+}
+
 preapp_setup(){
   echo -e "${color}Adding user roboshop${nocolor}"
   id roboshop &>>${data_log}
@@ -10,42 +18,30 @@ preapp_setup(){
     useradd roboshop &>>${data_log}
   fi
 #useradd roboshop &>>${data_log}
-  if [ $? -eq 0 ]; then
-    echo SUCCESS
-  else
-    echo FAILURE
-  fi
+ stat_check $?
   echo -e "${color}Makinging directory app${nocolor}"
   rm -rf ${app_path}
   mkdir ${app_path} &>>${data_log}
-  if [ $? -eq 0 ]; then
-      echo SUCCESS
-    else
-      echo FAILURE
-    fi
+
+  stat_check $?
 
   echo -e "${color}Downloading ${component} Content${nocolor}"
   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${data_log}
 
-  if [ $? -eq 0 ]; then
-    echo SUCCESS
-  else
-    echo FAILURE
-  fi
+  stat_check $?
 
   cd ${app_path}
   echo -e "${color}Extract ${component} Content${nocolor}"
   unzip /tmp/${component}.zip &>>${data_log}
-  if [ $? -eq 0 ]; then
-    echo SUCCESS
-  else
-    echo FAILURE
-  fi
+  stat_check $?
 }
 
 systemd_setup(){
-     echo -e "${color}Setup SystemD Service${nocolor}"
+    echo -e "${color}Setup SystemD Service${nocolor}"
     cp /root/roboshop-shell/$component.service /etc/systemd/system/$component.service &>>${data_log}
+
+    sed -i "s/roboshop_app_passwd/$roboshop_app_password/" /etc/systemd/system/$component.service  &>>${data_log}
+
     echo -e "${color}Starting Shipping Service${nocolor}"
 
     systemctl daemon-reload &>>${data_log}
@@ -120,7 +116,6 @@ preapp_setup
 echo -e "${color}Pip installing requirements${nocolor}"
 cd /app
 pip3.6 install -r requirements.txt &>>${data_log}
-
 
 systemd_setup
 }
