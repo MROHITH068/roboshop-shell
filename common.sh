@@ -5,18 +5,42 @@ app_path="/app"
 
 preapp_setup(){
   echo -e "${color}Adding user roboshop${nocolor}"
-  useradd roboshop
-
+#  id roboshop &>>${data_log}
+#  if [ $? -eq 1 ]; then
+#    useradd roboshop &>>${data_log}
+#  fi
+useradd roboshop &>>${data_log}
+  if [ $? -eq 1 ]; then
+    echo FAILURE
+  else
+    echo SUCCESS
+  fi
   echo -e "${color}Makinging directory app${nocolor}"
   rm -rf ${app_path}
   mkdir ${app_path} &>>${data_log}
+  if [ $? -eq 1 ]; then
+      echo FAILURE
+    else
+      echo SUCCESS
+  fi
 
-    echo -e "${color}Downloading ${component} Content${nocolor}"
-    curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${data_log}
+  echo -e "${color}Downloading ${component} Content${nocolor}"
+  curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${data_log}
 
-    cd ${app_path}
-    unzip /tmp/${component}.zip &>>${data_log}
+  if [ $? -eq 1 ]; then
+      echo FAILURE
+    else
+      echo SUCCESS
+    fi
 
+  cd ${app_path}
+  echo -e "${color}Extract ${component} Content${nocolor}"
+  unzip /tmp/${component}.zip &>>${data_log}
+  if [ $? -eq 1 ]; then
+      echo FAILURE
+    else
+      echo SUCCESS
+    fi
 }
 
 systemd_setup(){
