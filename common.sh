@@ -10,37 +10,37 @@ preapp_setup(){
 #    useradd roboshop &>>${data_log}
 #  fi
 useradd roboshop &>>${data_log}
-  if [ $? -eq 1 ]; then
-    echo FAILURE
-  else
+  if [ $? -eq 0 ]; then
     echo SUCCESS
+  else
+    echo FAILURE
   fi
   echo -e "${color}Makinging directory app${nocolor}"
   rm -rf ${app_path}
   mkdir ${app_path} &>>${data_log}
-  if [ $? -eq 1 ]; then
-      echo FAILURE
-    else
+  if [ $? -eq 0 ]; then
       echo SUCCESS
-  fi
+    else
+      echo FAILURE
+    fi
 
   echo -e "${color}Downloading ${component} Content${nocolor}"
   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${data_log}
 
-  if [ $? -eq 1 ]; then
-      echo FAILURE
-    else
-      echo SUCCESS
-    fi
+  if [ $? -eq 0 ]; then
+    echo SUCCESS
+  else
+    echo FAILURE
+  fi
 
   cd ${app_path}
   echo -e "${color}Extract ${component} Content${nocolor}"
   unzip /tmp/${component}.zip &>>${data_log}
-  if [ $? -eq 1 ]; then
-      echo FAILURE
-    else
-      echo SUCCESS
-    fi
+  if [ $? -eq 0 ]; then
+    echo SUCCESS
+  else
+    echo FAILURE
+  fi
 }
 
 systemd_setup(){
